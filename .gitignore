@@ -2,6 +2,10 @@
 results/gui_normals_split/
 results/cardiac_delta_k_gui/
 
+# External CAMP and Vascular-cut copies (keep local, do not publish with this repo)
+/camp/
+/vascular-cut/
+
 # Python and macOS filesystem artifacts
 __pycache__/
 *.py[cod]
