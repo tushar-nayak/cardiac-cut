@@ -1,8 +1,95 @@
-# Cardiac CAMP and δK workflow
+# Cardiac surface review and CAMP
 
-This project processes every real STL in `dataset/` through an automated
-surface split, CAMP patching, and a descriptive summary. No manual inner/outer
-labels are needed.
+This repository includes a browser based tool for inspecting a heart surface,
+choosing an inner/outer split, reviewing the basal cut, and optionally running
+CAMP. Meshes are local inputs: the app does not require a dataset to be stored
+in or committed to the repository.
+
+## Standalone app: clone, install, run
+
+### 1. Clone the repository
+
+In a terminal with Git installed:
+
+```bash
+git clone https://github.com/tushar-nayak/cardiac-cut.git
+cd cardiac-cut
+```
+
+### 2. Create the Conda environment
+
+Install [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+or Mamba if it is not already available, then create and activate the environment
+defined by the repository:
+
+```bash
+conda env create -f camp/CAMP_Toolkit/environment.yml
+conda activate camp
+```
+
+If the `camp` environment already exists, activate it instead. The environment
+includes the mesh, visualization, and CAMP dependencies used by the app.
+
+### 3. Add a mesh
+
+The repository contains an empty `input/` folder. Copy one or more STL, OBJ, or
+PLY surface meshes into it. For example:
+
+```bash
+cp /path/to/heart.stl input/
+```
+
+Meshes should use millimeter coordinates. The `input/` folder is gitignored, so
+your meshes remain local and are not uploaded to GitHub. You can also skip the
+copy and use **Upload mesh** in the app; uploads are saved in `input/` and remain
+available after restarting it. OBJ and PLY uploads are normalized to STL.
+
+### 4. Start the app
+
+From the repository root, run:
+
+```bash
+python code/review_cardiac_split_web.py --port 8767 --no-browser
+```
+
+Open [http://localhost:8767](http://localhost:8767) in your browser. The mesh
+dropdown scans `input/` at startup. If you add a file while the app is open,
+click **Refresh inputs**. In WSL, run the command in the VS Code WSL terminal and
+open the localhost link in your Windows browser.
+
+Choose **Center + normals** for the automatic split or **Manual plane** to
+separate the surfaces with the plane controls. Inspect both views, then choose
+**Save this mesh** to save the reviewed surfaces and provenance record under
+`results/manual_surface_split/`. Choose **Save cut + Run CAMP** to also run CAMP
+on both surfaces; CAMP results are stored under `results/cardiac_delta_k_gui/`.
+All files under `results/` are local outputs and are gitignored.
+
+Stop the server with **Ctrl+C** in its terminal. If port 8767 is occupied, use
+another port, for example `--port 8768`, and open that port in the browser.
+
+### Run with a different input folder
+
+By default the app scans the repository's `input/` directory. To scan another
+folder instead, pass `--input`:
+
+```bash
+python code/review_cardiac_split_web.py --input /path/to/meshes --port 8767 --no-browser
+```
+
+Uploads go to the selected input folder too. `--dataset` remains available as a
+backwards-compatible alias for `--input`.
+
+## Optional batch analysis
+
+The repository also has command line scripts for mesh inventory, automatic
+splitting, and batch CAMP analysis. They are separate from the browser app and
+read STL files from a local `dataset/` folder. No such dataset is included.
+The geometry based split is a heuristic: topology checks do not prove that the
+surfaces match the anatomical endocardial and epicardial walls. Review results
+visually and treat them as exploratory until the anatomy and CAMP fit quality
+are validated.
+
+For batch runs, the expected input layout is:
 
 ```text
 dataset/*.stl
@@ -12,31 +99,9 @@ dataset/*.stl
     └── filename-group summaries ───> phase spread and between-group spread
 ```
 
-The split is a geometry-driven heuristic. Topology checks confirm that the
-paired surfaces are connected and share their cut boundary; they do not confirm
-that the cut matches the anatomical endocardial and epicardial walls. Results
-should be visually reviewed and treated as exploratory until that anatomical
-interpretation and CAMP fit quality are validated.
-
-## Inputs and filename grouping
-
-By default, scripts read all `*.stl` files in `dataset/` and ignore macOS
-`._*` metadata files. Names matching `CG<patient>_<scan>_<phase>_MY.stl` are
-recorded as metadata for summaries. Names do not determine whether a mesh is
-processed. The current folder has 34 real STL files; filenames identify 12
-patient/scan groups, 11 of which contain multiple phases.
-
-## Setup
-
-The CAMP environment is described by the vendored toolkit:
-
-```bash
-conda env create -f camp/CAMP_Toolkit/environment.yml
-conda activate camp
-```
-
-If the `camp` environment already exists, activate it rather than creating it
-again. The commands below assume the repository root is the current directory.
+Batch scripts ignore macOS `._*` metadata files. Names matching
+`CG<patient>_<scan>_<phase>_MY.stl` are used as metadata in summaries; names do
+not determine whether a mesh is processed.
 
 ## 1. Inventory the STL files
 
@@ -143,8 +208,8 @@ surface and settings are identical. It welds the STL, refuses a remesh that
 changes the topology, and loads CAMP only from `camp/`.
 
 Add `--save-html` to the run command to ask CAMP to save its per-surface HTML
-visualizations. The default run processes 68 surfaces for the 34 current input
-meshes.
+visualizations. The number of processed surfaces depends on the STL files in
+your local `dataset/` directory (two surfaces per mesh).
 
 ### What CAMP writes
 

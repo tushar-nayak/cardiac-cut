@@ -30,7 +30,7 @@ python code/run_cardiac_delta_k.py --reuse-split --target-faces 50000
 ```
 
 Add `--save-html` to write interactive CAMP patch viewers. A full run processes
-68 surfaces (inner and outer for each of the 34 STLs) and can take a while. CAMP
+two surfaces per STL in the local input folder and can take a while. CAMP
 quality diagnostics (`pct_failed_quality`, `pct_at_min_size`) are retained in
 the summary because a returned δK does not by itself mean the patches converged
 well on these cardiac surfaces.
@@ -41,7 +41,7 @@ After CAMP has completed, launch the local browser viewer, which lets you switch
 among all inner and outer surfaces and CAMP fields:
 
 ```bash
-.conda-env/bin/python code/view_cardiac_camp.py
+python code/view_cardiac_camp.py
 ```
 
 It opens a browser at `http://localhost:8765` with selectors for every inner and
@@ -55,7 +55,7 @@ To export one standalone offline HTML view instead, choose a surface name from
 the output folders and run:
 
 ```bash
-.conda-env/bin/python code/view_cardiac_camp.py \
+python code/view_cardiac_camp.py \
   --case CG10_1_10_MY \
   --side-by-side \
   --export results/cardiac_delta_k/viewer/CG10_1_10_MY_inner_outer.html
@@ -114,26 +114,34 @@ should be visually inspected before interpreting δK scientifically.
 
 ## Interactive cardiac mesh review
 
-Start the dual-view browser app from the WSL terminal:
+### Run the standalone mesh review app
+
+The app does not need the research dataset or any meshes committed to Git.
+From the repository root, start it with:
 
 ```bash
-.conda-env/bin/python code/review_cardiac_split_web.py \
-  --dataset dataset \
-  --split-dir results/gui_normals_split \
-  --output results/manual_surface_split \
-  --camp-results results/cardiac_delta_k_gui \
+python code/review_cardiac_split_web.py \
   --port 8767 --no-browser
 ```
 
-Open `http://localhost:8767/`. The app lists the dataset meshes and also accepts
-STL, OBJ, and PLY uploads. Uploaded meshes are interpreted in millimeters and
-stored separately in `results/cardiac_uploads/`; the source dataset is left alone.
-Choose automatic center/normal splitting or a manual plane, adjust the basal cut,
-and review the inner and outer walls side by side. The review panel reports
+Open `http://localhost:8767/`. The app creates `input/` on first launch and
+scans it for STL, OBJ, and PLY meshes. Put meshes there to have them appear in
+the **Choose mesh** dropdown; use **Refresh inputs** to rescan without restarting.
+The upload button remains available and saves each uploaded mesh into `input/`
+(OBJ and PLY uploads are normalized to STL). The `input/` folder is gitignored,
+so patient meshes stay local and the app can be cloned and run without them.
+
+Choose automatic center/normal splitting or a manual plane, adjust the basal
+cut, and review the inner and outer walls side by side. The review panel reports
 connected components, boundary loops, Euler number, and removed area. Its
 cross-section tool measures area, perimeter, and approximate diameters on both
-surfaces. Saved outputs include the two STLs and a `review.json` provenance and
-quality record. `Save cut + Run CAMP` runs CAMP on both saved surfaces.
+surfaces. Saved outputs go under `results/` and include the two STLs and a
+`review.json` provenance and quality record. `Save cut + Run CAMP` runs CAMP on
+both saved surfaces.
+
+To use a different local input directory, pass `--input /path/to/meshes`.
+`--dataset` remains as a compatibility alias. Browser uploads go to the same
+input directory unless `--uploads` is explicitly provided.
 
 Both viewers use the same fixed mesh bounds and share rotations, pan, and zoom.
 Moving or tilting the cut plane preserves the live camera during both the

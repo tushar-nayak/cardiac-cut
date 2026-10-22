@@ -21,6 +21,8 @@ __pycache__/
 # Patient datasets and scan volumes (keep local; do not commit)
 /dataset/
 /datasets/
+/input/*
+!/input/.gitkeep
 **/dataset/
 **/datasets/
 /results/

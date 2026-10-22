@@ -39,13 +39,24 @@ def _path_pair(split_dir: Path, case: str):
 
 
 def _read_mesh(path: Path):
-    from vtkmodules.vtkIOGeometry import vtkSTLReader
-    reader = vtkSTLReader()
-    reader.SetFileName(str(path))
-    reader.Update()
-    output = reader.GetOutput()
+    suffix = path.suffix.lower()
+    if suffix == ".stl":
+        from vtkmodules.vtkIOGeometry import vtkSTLReader
+        reader = vtkSTLReader()
+        reader.SetFileName(str(path))
+        reader.Update()
+        output = reader.GetOutput()
+    else:
+        # Convert non-STL input meshes through trimesh so clipping and preview
+        # use the same triangle-surface representation for STL, OBJ, and PLY.
+        import trimesh
+        mesh = trimesh.load(str(path), force="mesh", process=True)
+        if not isinstance(mesh, trimesh.Trimesh) or len(mesh.faces) == 0:
+            raise ValueError(f"No triangle surface found in {path.name}")
+        reader = _reader_from_trimesh(mesh)
+        output = reader.GetOutput()
     if output.GetNumberOfPoints() == 0 or output.GetNumberOfCells() == 0:
-        raise ValueError(f"Empty or unreadable STL: {path}")
+        raise ValueError(f"Empty or unreadable mesh: {path}")
     return reader
 
 
@@ -305,7 +316,7 @@ details{border-top:1px solid #e3e9ee;margin-top:9px;padding-top:7px;color:#52627
 .upload-button{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border:1px solid #b9c7d3;border-radius:6px;background:#eaf0f5;color:#263746;font-weight:650;cursor:pointer;white-space:nowrap}.upload-button:hover{background:#dce6ef}.upload-button input{display:none}
 @media(max-width:1000px){main{height:auto;min-height:calc(100vh - 62px);grid-template-rows:auto auto auto auto auto auto}.adjust{grid-template-columns:repeat(2,1fr)}.views{grid-template-columns:1fr}.plot{height:55vh}.inspection{grid-template-columns:1fr}}
 </style></head><body><header><div><h1>Cardiac surface review</h1><p>Position the cut plane, check the outer-wall preview, then save the reviewed pair.</p></div></header><main>
-<section class="card topbar"><label class="upload-button" title="STL, OBJ, or PLY; coordinates are interpreted as millimeters">Upload mesh<input id="meshUpload" type="file" accept=".stl,.obj,.ply"></label><label class="case"><span class="step">1</span>Choose mesh <select id="case"></select></label>
+<section class="card topbar"><label class="upload-button" title="STL, OBJ, or PLY; coordinates are interpreted as millimeters">Upload mesh<input id="meshUpload" type="file" accept=".stl,.obj,.ply"></label><label class="case"><span class="step">1</span>Choose mesh <select id="case"></select></label><button class="secondary" id="refreshInputs" title="Rescan the local input folder">Refresh inputs</button>
 <label class="keep">Split method <select id="planeMode" title="Choose how inner and outer surfaces are separated"><option value="auto" selected>Center + normals</option><option value="manual">Manual plane</option></select></label>
 <label class="keep">Keep <select id="side"><option value="negative">Main wall (suggested)</option><option value="positive">Opposite side</option></select></label>
 <button class="secondary" id="reset">Reset plane</button><button id="save">Save this mesh</button></section>
@@ -321,7 +332,7 @@ details{border-top:1px solid #e3e9ee;margin-top:9px;padding-top:7px;color:#52627
 <div class="view"><div class="view-head"><h2>Outer surface</h2><small>gray = removed · red = cut plane</small></div><div id="outer" class="plot"></div></div></section>
 <section class="card view-tools"><span class="label">Mesh</span><select id="displayMode"><option value="cut">Plane preview</option><option id="campOption" value="camp" disabled>CAMP patches</option></select><span class="label">CAMP field</span><select id="campField"><option value="integrated_K">Integrated curvature</option><option value="avg_kg">Mean Gaussian curvature</option><option value="eta">Eta</option><option value="R2">R²</option><option value="patch_id">Patch ID</option><option value="area_mm2">Patch area</option><option value="quality_status">Fit pass/fail</option></select><label><input id="campEdges" type="checkbox" checked> Patch edges</label><label>Remesh <input id="targetFaces" type="number" min="5000" max="200000" step="5000" value="50000"></label><button id="runCamp" disabled>Save cut + Run CAMP</button><span class="label" style="margin-left:8px">Color</span><select id="colorMode" aria-label="Mesh color"><option value="axis">Long-axis</option><option value="anatomical">Anatomical</option></select><label><input id="contours" type="checkbox"> Surface contours</label><label title="For raw-mesh runs, apply the same plane to both saved surfaces"><input id="applyInner" type="checkbox"> Cut inner on save</label><span class="label">View</span><button class="secondary" data-view="fit">Fit</button><button class="secondary" data-view="front">Front</button><button class="secondary" data-view="side">Side</button><button class="secondary" data-view="top">Top</button></section>
 <section class="card inspection"><div><h3>Split quality</h3><div id="quality" class="diag">Quality details appear after the preview updates.</div></div><div><h3>Cross-section measurement</h3><div class="measure"><span>From plane</span><input id="measureOffset" type="range" min="0" max="80" step="1" value="10"><output id="measureOffsetValue">10 mm</output><button class="secondary" id="measureButton">Measure</button></div><div id="measurement" class="diag">Move the measurement plane toward the apex and measure inner and outer cross-sections.</div></div><div style="grid-column:1/-1"><details><summary>3D visibility</summary><div class="coords"><label><input id="showInner" type="checkbox" checked> Inner surface</label><label><input id="showOuter" type="checkbox" checked> Outer surface</label><label><input id="showRemoved" type="checkbox" checked> Removed region</label><label><input id="showPlane" type="checkbox" checked> Cut plane</label><label><input id="showMeasurePlane" type="checkbox" checked> Measurement plane</label></div></details></div></section>
-<section class="card footer"><span class="step">3</span><span id="status" class="status">Loading meshes…</span><span class="hint">Uploads are kept separately in results/cardiac_uploads. Saved pairs go to results/manual_surface_split.</span></section>
+<section class="card footer"><span class="step">3</span><span id="status" class="status">Loading meshes…</span><span class="hint">Meshes in input/ appear in the dropdown. Uploads are saved there; reviewed pairs go to results/manual_surface_split.</span></section>
 </main><script>
 const byId=id=>document.getElementById(id), status=byId('status'); let caseData=null, campData=null, timer=null, baseOrigin=[0,0,0], normal=[1,0,0], bounds=null, latestRequest=0, previewAbort=null, lastPreview=null, measureResult=null, lastCamera=null, lastDragMode='orbit', cameraSyncInstalled=false, cameraSyncBusy=0;
 let cameraFollowSource=null,cameraFollowFrame=null,cameraFollowUntil=0,cameraPointerDown=false;
@@ -421,7 +432,7 @@ try{let res=await fetch('/api/preview',{method:'POST',headers:{'Content-Type':'a
 function invalidateCamp(){if(campData){campData=null;byId('campOption').disabled=true;byId('displayMode').value='cut'}}
 function schedule(){invalidateCamp();byId('azv').value=byId('az').value+'°';byId('elv').value=byId('el').value+'°';byId('offv').value=byId('off').value+' mm';moveCutPlane();if(measureResult){moveMeasurePlane();byId('measurement').textContent='Cut plane moved; click Measure to update the section readings.'}clearTimeout(timer);timer=setTimeout(refresh,130)}
 function updateInnerNote(){byId('innerNote').textContent=byId('applyInner').checked?'cut preview · plane will be saved on inner':'cut preview · inner saved as supplied'}
-async function loadCase(name){status.classList.remove('error');let mode=byId('planeMode').value;status.textContent=mode==='auto'&&sourceMode==='raw_dataset'?'Running center/normal/geodesic split for '+name+'…':'Loading '+name+'…';lastPreview=null;campData=null;measureResult=null;byId('quality').textContent='Quality details appear after the preview updates.';byId('measurement').textContent='Move the measurement plane toward the apex and measure inner and outer cross-sections.';byId('campOption').disabled=true;byId('displayMode').value='cut';let r=await fetch('/api/mesh?case='+encodeURIComponent(name)+'&split_method='+encodeURIComponent(mode));let d=await r.json();if(!r.ok){status.textContent=d.error;status.classList.add('error');return}caseData=d;bounds=d.bounds;byId('applyInner').checked=!!d.apply_cut_to_inner;byId('runCamp').disabled=false;byId('applyInner').disabled=mode==='manual';byId('side').disabled=mode==='manual';updateInnerNote();baseOrigin=d.plane.origin;normal=d.plane.normal;
+async function loadCase(name){if(!name)return;status.classList.remove('error');let mode=byId('planeMode').value;status.textContent=mode==='auto'&&sourceMode==='raw_meshes'?'Running center/normal/geodesic split for '+name+'…':'Loading '+name+'…';lastPreview=null;campData=null;measureResult=null;byId('quality').textContent='Quality details appear after the preview updates.';byId('measurement').textContent='Move the measurement plane toward the apex and measure inner and outer cross-sections.';byId('campOption').disabled=true;byId('displayMode').value='cut';let r=await fetch('/api/mesh?case='+encodeURIComponent(name)+'&split_method='+encodeURIComponent(mode));let d=await r.json();if(!r.ok){status.textContent=d.error;status.classList.add('error');return}caseData=d;bounds=d.bounds;byId('applyInner').checked=!!d.apply_cut_to_inner;byId('runCamp').disabled=false;byId('applyInner').disabled=mode==='manual';byId('side').disabled=mode==='manual';updateInnerNote();baseOrigin=d.plane.origin;normal=d.plane.normal;
 for(let i=0;i<3;i++){let id=['ox','oy','oz'][i],input=byId(id),lo=bounds[i*2],hi=bounds[i*2+1],span=hi-lo;input.min=lo-span;input.max=hi+span;input.value=baseOrigin[i].toFixed(3)}
 let az=Math.atan2(normal[1],normal[0])*180/Math.PI,el=Math.asin(normal[2])*180/Math.PI;byId('az').value=az;byId('el').value=el;let diag=Math.hypot(bounds[1]-bounds[0],bounds[3]-bounds[2],bounds[5]-bounds[4]);byId('off').min=-diag;byId('off').max=diag;byId('off').value=0;byId('side').value='negative';await renderBoth();refresh()}
 for(let id of ['ox','oy','oz','az','el','off','side'])byId(id).addEventListener('input',()=>{if(id==='az'||id==='el'){let pivot=currentOrigin(),v=Number(byId('off').value);normal=vecFromAngles();baseOrigin=pivot.map((x,i)=>x-normal[i]*v);/* Keep the plane at the same position while its normal changes. */}else if(id==='off'){let n=vecFromAngles(),v=Number(byId('off').value);for(let i=0;i<3;i++)byId(['ox','oy','oz'][i]).value=baseOrigin[i]+n[i]*v;}else if(id==='ox'||id==='oy'||id==='oz'){baseOrigin=currentOrigin();byId('off').value=0;}schedule()});
@@ -434,21 +445,37 @@ async function runCamp(){if(!caseData)return;let button=byId('runCamp');button.d
 byId('colorMode').addEventListener('change',updateAppearance);byId('contours').addEventListener('change',updateAppearance);byId('campField').addEventListener('change',updateAppearance);byId('campEdges').addEventListener('change',updateAppearance);byId('displayMode').addEventListener('change',()=>{if(byId('displayMode').value==='camp'&&!campData)byId('displayMode').value='cut';updateAppearance();if(campData&&byId('displayMode').value==='camp')renderCampStatus()});['showInner','showOuter','showRemoved','showPlane','showMeasurePlane'].forEach(id=>byId(id).addEventListener('change',updateAppearance));byId('measureButton').addEventListener('click',measureSection);byId('measureOffset').addEventListener('input',()=>{byId('measureOffsetValue').value=byId('measureOffset').value+' mm';if(measureResult){byId('measurement').textContent='Measurement plane moved; click Measure to update the readings.';moveMeasurePlane()}});byId('runCamp').addEventListener('click',runCamp);byId('applyInner').addEventListener('change',()=>{invalidateCamp();updateInnerNote()});document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 byId('preview').addEventListener('click',refresh);byId('reset').addEventListener('click',()=>{if(caseData)loadCase(caseData.case)});
 byId('save').addEventListener('click',async()=>{if(!caseData)return;byId('save').disabled=true;status.classList.remove('error');status.textContent='Saving reviewed surfaces…';let applyInner=byId('applyInner').checked||byId('planeMode').value==='manual',r=await fetch('/api/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case:caseData.case,origin:currentOrigin(),normal:vecFromAngles(),keep_side:byId('side').value,split_method:byId('planeMode').value,apply_cut_to_inner:applyInner})}),d=await r.json();status.textContent=r.ok?(applyInner?'Saved plane-split inner and outer surfaces · ':'Saved outer cut; inner preserved · ')+d.output:d.error;if(!r.ok)status.classList.add('error');byId('save').disabled=false});
-let sourceMode='pre_split';function showCases(cases,selected=''){let node=byId('case');node.replaceChildren(...cases.map(c=>new Option(c,c)));if(selected)node.value=selected}async function start(){let r=await fetch('/api/cases'),d=await r.json();if(!r.ok){status.textContent=d.error;return}sourceMode=d.source_mode||'pre_split';byId('planeMode').querySelector('[value="manual"]').disabled=sourceMode!=='raw_dataset';showCases(d.cases);if(d.cases.length)loadCase(d.cases[0]);else status.textContent='No raw meshes found. Upload an STL, OBJ, or PLY mesh to begin.'}byId('meshUpload').addEventListener('change',async e=>{let file=e.target.files[0];if(!file)return;let button=byId('meshUpload');button.disabled=true;status.classList.remove('error');status.textContent='Uploading and checking '+file.name+'…';try{let r=await fetch('/api/upload?filename='+encodeURIComponent(file.name),{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:file}),d=await r.json();if(!r.ok)throw new Error(d.error||'Upload failed');let cases=await fetch('/api/cases').then(x=>x.json());sourceMode=cases.source_mode||'raw_dataset';byId('planeMode').querySelector('[value="manual"]').disabled=false;showCases(cases.cases,d.case);await loadCase(d.case);status.textContent='Loaded uploaded mesh '+file.name+' · source copy saved under results/cardiac_uploads'}catch(err){status.textContent='Upload failed: '+err.message;status.classList.add('error')}finally{button.disabled=false;e.target.value=''}});start();
+let sourceMode='pre_split';function showCases(cases,selected=''){let node=byId('case');node.replaceChildren(...cases.map(c=>new Option(c,c)));if(selected)node.value=selected}async function refreshInputs(selected=''){let r=await fetch('/api/cases'),d=await r.json();if(!r.ok)throw new Error(d.error||'Could not scan input folder');sourceMode=d.source_mode||'pre_split';byId('planeMode').querySelector('[value="manual"]').disabled=sourceMode!=='raw_meshes';showCases(d.cases,selected);return d}async function start(){try{let d=await refreshInputs();if(d.cases.length)loadCase(byId('case').value||d.cases[0]);else status.textContent='No meshes found in input/. Add an STL, OBJ, or PLY mesh there, or use Upload mesh.'}catch(err){status.textContent=err.message;status.classList.add('error')}}byId('refreshInputs').addEventListener('click',async()=>{try{let current=byId('case').value,d=await refreshInputs(current);if(d.cases.length&&!d.cases.includes(current))loadCase(d.cases[0]);status.textContent=d.cases.length+' mesh(es) found in input/'}catch(err){status.textContent=err.message;status.classList.add('error')}});byId('meshUpload').addEventListener('change',async e=>{let file=e.target.files[0];if(!file)return;let button=byId('meshUpload');button.disabled=true;status.classList.remove('error');status.textContent='Uploading and checking '+file.name+'…';try{let r=await fetch('/api/upload?filename='+encodeURIComponent(file.name),{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:file}),d=await r.json();if(!r.ok)throw new Error(d.error||'Upload failed');await refreshInputs(d.case);byId('planeMode').querySelector('[value="manual"]').disabled=false;await loadCase(d.case);status.textContent='Loaded '+file.name+' · saved in input/'}catch(err){status.textContent='Upload failed: '+err.message;status.classList.add('error')}finally{button.disabled=false;e.target.value=''}});byId('case').addEventListener('change',()=>loadCase(byId('case').value));start();
 </script></body></html>'''
 
 
-def make_handler(split_dir: Path, output_dir: Path, dataset_dir: Path | None = None,
+def make_handler(split_dir: Path, output_dir: Path, input_dir: Path | None = None,
                  camp_results_dir: Path | None = None,
                  uploads_dir: Path | None = None):
-    # Cache each automatically split case for this review session. In raw-dataset
+    # Cache each automatically split case for this review session. In raw-mesh
     # mode, the exact project splitter is run once per source STL with no basal
     # cut; the adjustable plane is applied afterward in the viewer.
     mesh_cache = {}
     mesh_cache_lock = threading.Lock()
-    raw_sources = ({p.stem: p for p in dataset_dir.glob("*.stl") if not p.name.startswith("._")}
-                   if dataset_dir and dataset_dir.is_dir() else {})
-    uploads_dir = uploads_dir or (output_dir.parent / "cardiac_uploads")
+    input_dir = input_dir or (ROOT / "input")
+    input_dir.mkdir(parents=True, exist_ok=True)
+    supported_meshes = {".stl", ".obj", ".ply"}
+    raw_sources = {}
+    def scan_input():
+        found = {}
+        scan_dirs = list(dict.fromkeys((input_dir, uploads_dir or input_dir)))
+        for folder in scan_dirs:
+            if not folder.is_dir():
+                continue
+            for path in sorted(folder.iterdir()):
+                if (path.is_file() and path.suffix.lower() in supported_meshes
+                        and not path.name.startswith(("._", ".upload-"))):
+                    found[path.stem] = path
+        raw_sources.clear()
+        raw_sources.update(found)
+        return found
+    scan_input()
+    uploads_dir = uploads_dir or input_dir
     uploads_dir.mkdir(parents=True, exist_ok=True)
     upload_names = {}
     for p in uploads_dir.glob("*.stl"):
@@ -569,7 +596,7 @@ def make_handler(split_dir: Path, output_dir: Path, dataset_dir: Path | None = N
                     upload_names[case] = Path(name).name
                 self._json(201, {"case": case, "filename": Path(name).name,
                                  "faces": int(len(mesh.faces)),
-                                 "source": "results/cardiac_uploads"})
+                                 "source": "input"})
             finally:
                 temp_path.unlink(missing_ok=True)
 
@@ -580,9 +607,10 @@ def make_handler(split_dir: Path, output_dir: Path, dataset_dir: Path | None = N
             elif url.path == "/plotly.min.js":
                 self._send(200, get_plotlyjs().encode(), "application/javascript; charset=utf-8")
             elif url.path == "/api/cases":
-                found = sorted(raw_sources) if raw_sources else _cases(split_dir)
+                sources = scan_input()
+                found = sorted(sources) if sources else _cases(split_dir)
                 self._json(200, {"cases": found,
-                                 "source_mode": "raw_dataset" if raw_sources else "pre_split"})
+                                 "source_mode": "raw_meshes" if sources else "pre_split"})
             elif url.path == "/api/mesh":
                 case = parse_qs(url.query).get("case", [""])[0]
                 try:
@@ -591,7 +619,7 @@ def make_handler(split_dir: Path, output_dir: Path, dataset_dir: Path | None = N
                         raise ValueError("split_method must be manual or auto")
                     if split_method == "manual":
                         if case not in raw_sources:
-                            raise ValueError("Manual plane splitting requires a raw closed STL from --dataset")
+                            raise ValueError("Manual plane splitting requires a raw STL, OBJ, or PLY mesh in input/")
                         raw_reader = _read_mesh(raw_sources[case])
                         outer = raw_reader.GetOutput()
                         inner_payload = {"x": [], "y": [], "z": [], "i": [], "j": [], "k": [], "n_faces": 0}
@@ -661,7 +689,7 @@ def make_handler(split_dir: Path, output_dir: Path, dataset_dir: Path | None = N
                     raise ValueError("keep_side must be positive or negative")
                 if split_method == "manual":
                     if case not in raw_sources:
-                        raise ValueError("Manual plane splitting requires a raw closed STL from --dataset")
+                        raise ValueError("Manual plane splitting requires a raw STL, OBJ, or PLY mesh in input/")
                     inner_piece, outer_piece = _manual_plane_split(
                         raw_sources[case], origin, normal, keep_side)
                     inner_reader = _reader_from_trimesh(inner_piece)
@@ -857,8 +885,9 @@ def make_handler(split_dir: Path, output_dir: Path, dataset_dir: Path | None = N
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--dataset", type=Path, default=ROOT / "dataset",
-                        help="raw closed heart STL files to split automatically")
+    parser.add_argument("--input", "--dataset", dest="input_dir", type=Path,
+                        default=ROOT / "input",
+                        help="folder scanned for STL, OBJ, and PLY meshes (default: ./input)")
     parser.add_argument("--split-dir", type=Path, default=ROOT / "results" / "gui_normals_split",
                         help="working directory for automatic split outputs")
     parser.add_argument("--pre-split-dir", type=Path,
@@ -867,21 +896,22 @@ def main():
     parser.add_argument("--camp-results", type=Path,
                         default=ROOT / "results" / "cardiac_delta_k_gui",
                         help="CAMP output directory for per-mesh GUI runs")
-    parser.add_argument("--uploads", type=Path, default=ROOT / "results" / "cardiac_uploads",
-                        help="separate storage for meshes uploaded through the browser")
+    parser.add_argument("--uploads", type=Path, default=None,
+                        help="optional upload storage override (default: the input folder)")
     parser.add_argument("--host", default="127.0.0.1", help="bind to localhost by default")
     parser.add_argument("--port", type=int, default=8766)
     parser.add_argument("--no-browser", action="store_true", help="print URL without opening a browser")
     args = parser.parse_args()
-    dataset_dir = None if args.pre_split_dir else args.dataset
+    input_dir = args.input_dir
     split_dir = args.pre_split_dir or args.split_dir
-    if dataset_dir and not any(dataset_dir.glob("*.stl")):
-        print(f"No raw STL files found in {dataset_dir}; browser uploads remain available.")
+    if not any(p.is_file() and p.suffix.lower() in {".stl", ".obj", ".ply"}
+               for p in input_dir.iterdir()) if input_dir.is_dir() else True:
+        print(f"No STL, OBJ, or PLY meshes found in {input_dir}; browser uploads remain available.")
     if args.pre_split_dir and not args.pre_split_dir.is_dir():
         raise SystemExit(f"Split directory not found: {args.pre_split_dir}")
     split_dir.mkdir(parents=True, exist_ok=True)
     server = ThreadingHTTPServer((args.host, args.port),
-                                 make_handler(split_dir, args.output, dataset_dir,
+                                 make_handler(split_dir, args.output, input_dir,
                                               args.camp_results, args.uploads))
     url = f"http://127.0.0.1:{args.port}/"
     print(f"Cardiac split review app running at {url}")
