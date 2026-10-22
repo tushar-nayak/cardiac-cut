@@ -1,0 +1,20 @@
+# Project defaults for the web app, so nobody has to remember flags.
+#
+# address = 127.0.0.1 is the important line. Streamlit otherwise binds every
+# interface, which does two unwanted things on a university machine: Windows
+# Firewall raises an admin prompt for the new listener, and the app -- which has no
+# authentication of any kind -- becomes reachable at this machine's routable
+# address. A loopback listener needs no firewall rule, so there is no prompt.
+#
+# Change this only alongside putting authentication in front of the app.
+
+[server]
+address = "127.0.0.1"
+port = 8501
+
+[browser]
+gatherUsageStats = false
+
+[runner]
+# Uploaded geometry can be large; don't re-run the script on every file poll.
+fastReruns = true

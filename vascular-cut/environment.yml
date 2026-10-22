@@ -1,0 +1,17 @@
+# Conda environment for the vascular cut tool.
+#
+#   conda env create -f environment.yml
+#   conda activate vascular-cut
+#   python branch_gui.py
+#
+# Conda is used only to pin Python 3.11 (the version everything has wheels for);
+# the packages themselves come from PyPI via pip, so requirements.txt stays the
+# single source of truth and there is no conda-forge/PyPI version drift.
+name: vascular-cut
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+      - -r requirements.txt

@@ -1,0 +1,36 @@
+12 cases, 12 to run, baseline HEAD
+  [1/12] GT/DJ18_2: 36 cuts 40s
+  [2/12] GT/DJ8_1: 36 cuts 12s
+  [3/12] GT/KK15_1: 36 cuts 23s
+  [4/12] GT/KK16_1: 36 cuts 60s
+  [5/12] GT/KK20_2: 36 cuts 35s
+  [6/12] GT/KK24_1: 36 cuts 32s
+  [7/12] GT/KK28_11: 36 cuts 26s
+  [8/12] GT/KK32_0: 36 cuts 33s
+  [9/12] GT/KK40_3: 36 cuts 32s
+  [10/12] GT/KK4_2: 36 cuts 20s
+  [11/12] GT/KK5_1: 36 cuts 45s
+  [12/12] GT/KP20_1: 36 cuts 43s
+
+cases 12: 12 scored, 0 rejected   cuts skipped 0
+
+                        cuts        flat       euler       CLEAN  refused  foreign mm2
+--------------------------------------------------------------------------------------
+branch usable
+  base                   192   172   90%   175   91%   163   85%       17          264
+  new                    192   172   90%   175   91%   163   85%       17          264
+branch junction
+  base                    96    29   30%    43   45%    21   22%       52          446
+  new                     96    29   30%    43   45%    21   22%       52          446
+trunk usable
+  base                    96    68   71%    75   78%    68   71%       21           44
+  new                     96    68   71%    75   78%    68   71%       21           44
+trunk junction
+  base                    48     9   19%    13   27%     9   19%       35          101
+  new                     48     9   19%    13   27%     9   19%       35          101
+--------------------------------------------------------------------------------------
+ALL
+  base                   432   278   64%   306   71%   261   60%      125          854
+  new                    432   278   64%   306   71%   261   60%      125          854
+
+clean under the baseline, not clean now: 0

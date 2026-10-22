@@ -1,0 +1,58 @@
+previous run kept as bench_last.prev.jsonl
+12 cases, 12 to run, baseline main
+  [1/12] GT/DJ18_2: 36 cuts 32s
+  [2/12] GT/DJ8_1: 36 cuts 8s
+  [3/12] GT/KK15_1: 36 cuts 15s
+  [4/12] GT/KK16_1: 36 cuts 43s
+  [5/12] GT/KK20_2: 36 cuts 30s
+  [6/12] GT/KK24_1: 36 cuts 32s
+  [7/12] GT/KK28_11: 36 cuts 25s
+  [8/12] GT/KK32_0: 36 cuts 26s
+  [9/12] GT/KK40_3: 36 cuts 34s
+  [10/12] GT/KK4_2: 36 cuts 21s
+  [11/12] GT/KK5_1: 36 cuts 46s
+  [12/12] GT/KP20_1: 36 cuts 43s
+
+cases 12: 12 scored, 0 rejected   cuts skipped 0, reclassified 6
+    6 cut(s) held out: the variants disagree on trunk-vs-branch there, so they are not cutting on the same terms. The table below compares the CUTTER; the family call is judged separately (see tools/ANATOMY.md).
+
+                        cuts        flat       euler       CLEAN  refused  foreign mm2
+--------------------------------------------------------------------------------------
+branch usable
+  base                   192   170   89%   176   92%   161   84%       16          290
+  new                    192   172   90%   175   91%   163   85%       17          264
+branch junction
+  base                    96    29   30%    42   44%    21   22%       53          414
+  new                     96    29   30%    43   45%    21   22%       52          446
+trunk usable
+  base                    92    77   84%    81   88%    76   83%       11           25
+  new                     92    66   72%    72   78%    66   72%       20           31
+trunk junction
+  base                    46    20   43%    22   48%    19   41%       24           24
+  new                     46     9   20%    11   24%     9   20%       35           22
+--------------------------------------------------------------------------------------
+ALL
+  base                   426   296   69%   321   75%   277   65%      104          753
+  new                    426   276   65%   301   71%   259   61%      124          762
+
+clean under the baseline, not clean now: 20
+  GT/DJ8_1         Aorta root (proximal)   70%  r= 15.7  trunk  -> dev 1.25 euler 1 foreign 16
+  GT/DJ8_1         Aorta root (proximal)   80%  r= 15.7  trunk  -> ValueError: cannot be cut here, the opening comes out 7 mm out of plan
+  GT/DJ8_1         Aorta root (proximal)   85%  r= 15.7  trunk  -> ValueError: cannot be cut here, the opening comes out 10 mm out of pla
+  GT/DJ8_1         Aorta distal            90%  r= 13.8  trunk  -> ValueError: cannot be cut here, the opening comes out 4 mm out of plan
+  GT/KK15_1        Aorta distal            80%  r= 15.4  trunk  -> ValueError: cannot be cut here, the opening comes out 8 mm out of plan
+  GT/KK15_1        Aorta distal            85%  r= 15.4  trunk  -> ValueError: cannot be cut here, the opening comes out 11 mm out of pla
+  GT/KK15_1        Aorta distal            90%  r= 15.4  trunk  -> ValueError: cannot be cut here, the opening comes out 17 mm out of pla
+  GT/KK16_1        Aorta distal            85%  r= 19.7  trunk  -> ValueError: cannot be cut here, the opening comes out 4 mm out of plan
+  GT/KK16_1        Aorta distal            90%  r= 19.7  trunk  -> ValueError: cannot be cut here, the opening comes out 14 mm out of pla
+  GT/KK20_2        Aorta root (proximal)   80%  r= 20.3  trunk  -> ValueError: cannot be cut here, the opening comes out 6 mm out of plan
+  GT/KK20_2        Aorta root (proximal)   85%  r= 20.3  trunk  -> ValueError: cannot be cut here, the opening comes out 9 mm out of plan
+  GT/KK20_2        Aorta root (proximal)   90%  r= 20.3  trunk  -> ValueError: cannot be cut here, the opening comes out 13 mm out of pla
+  GT/KK32_0        Aorta root (proximal)   50%  r= 20.7  trunk  -> ValueError: cannot be cut here, the opening comes out 3 mm out of plan
+  GT/KK32_0        Aorta root (proximal)   70%  r= 20.7  trunk  -> ValueError: cannot be cut here, the opening comes out 13 mm out of pla
+  GT/KK32_0        Aorta distal            20%  r= 32.0  trunk  -> ValueError: cannot be cut here, the opening comes out 24 mm out of pla
+  GT/KK32_0        Aorta distal            50%  r= 32.0  trunk  -> ValueError: cannot be cut here, the opening comes out 10 mm out of pla
+  GT/KK32_0        Aorta distal            80%  r= 32.0  trunk  -> ValueError: cannot be cut here, the opening comes out 6 mm out of plan
+  GT/KK32_0        Aorta distal            85%  r= 32.0  trunk  -> ValueError: cannot be cut here, the opening comes out 17 mm out of pla
+  GT/KK32_0        Aorta distal            90%  r= 32.0  trunk  -> ValueError: cannot be cut here, the opening comes out 24 mm out of pla
+  GT/KK4_2         Aorta distal            20%  r= 18.2  trunk  -> dev 0.86 euler 1 foreign 0

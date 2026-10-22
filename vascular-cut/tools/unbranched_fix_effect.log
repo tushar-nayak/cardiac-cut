@@ -1,0 +1,674 @@
+30 meshes x 2 conditions at 100,000 faces, seed 42
+[input] Loaded mesh: 50000 verts, 99690 faces
+[converge] failed quality (R2+eta): 10/793 (1.3%)
+[converge] at min size (unsplittable): 64/793 (8.1%)
+[done] 793 patches after splits=115
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.0163, 0.005128]
+[K] integrated_K: [-0.3191, 0.2452]
+[eta] range     : [0.0009056, 0.1165]
+[R2] range      : [0.6782, 0.9992]
+  [ 1/30] DJ18_2     off 0.005696  (0.2 min)
+[input] Loaded mesh: 50000 verts, 99690 faces
+[connected] 0 stray component(s) became their own patch, 5 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 12/784 (1.5%)
+[converge] at min size (unsplittable): 52/784 (6.6%)
+[done] 784 patches after splits=112
+[trim] trimmed patches: 0/784 (area frac=0.0000)
+[kg] avg_kg      : [-0.0166, 0.005676]
+[K] integrated_K: [-0.3538, 0.2481]
+[eta] range     : [0.000116, 0.1362]
+[R2] range      : [0.3182, 0.9991]
+  [ 1/30] DJ18_2     on  0.005754  (0.4 min)
+[input] Loaded mesh: 50000 verts, 99782 faces
+[converge] failed quality (R2+eta): 0/793 (0.0%)
+[converge] at min size (unsplittable): 0/793 (0.0%)
+[done] 793 patches after splits=99
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.003291, 0.004479]
+[K] integrated_K: [-0.1496, 0.4667]
+[eta] range     : [0.003364, 0.0734]
+[R2] range      : [0.9399, 0.9993]
+  [ 2/30] DJ8_1      off 0.003945  (0.6 min)
+[input] Loaded mesh: 50000 verts, 99782 faces
+[connected] 0 stray component(s) became their own patch, 6 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/793 (0.0%)
+[converge] at min size (unsplittable): 0/793 (0.0%)
+[done] 793 patches after splits=99
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.003263, 0.004428]
+[K] integrated_K: [-0.1469, 0.466]
+[eta] range     : [0.003944, 0.0734]
+[R2] range      : [0.9327, 0.9992]
+  [ 2/30] DJ8_1      on  0.003906  (0.8 min)
+[input] Loaded mesh: 50000 verts, 99778 faces
+[converge] failed quality (R2+eta): 0/797 (0.0%)
+[converge] at min size (unsplittable): 17/797 (2.1%)
+[done] 797 patches after splits=104
+[trim] trimmed patches: 0/797 (area frac=0.0000)
+[kg] avg_kg      : [-0.00784, 0.003396]
+[K] integrated_K: [-0.2624, 0.3177]
+[eta] range     : [0.007899, 0.07195]
+[R2] range      : [0.95, 0.9993]
+  [ 3/30] KK15_1     off 0.004001  (1.0 min)
+[input] Loaded mesh: 50000 verts, 99778 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/788 (0.0%)
+[converge] at min size (unsplittable): 3/788 (0.4%)
+[done] 788 patches after splits=99
+[trim] trimmed patches: 0/788 (area frac=0.0000)
+[kg] avg_kg      : [-0.008466, 0.0029]
+[K] integrated_K: [-0.2641, 0.317]
+[eta] range     : [0.006837, 0.06947]
+[R2] range      : [0.9099, 0.9994]
+  [ 3/30] KK15_1     on  0.003895  (1.1 min)
+[input] Loaded mesh: 50000 verts, 99818 faces
+[converge] failed quality (R2+eta): 18/828 (2.2%)
+[converge] at min size (unsplittable): 108/828 (13.0%)
+[done] 828 patches after splits=132
+[trim] trimmed patches: 0/828 (area frac=0.0000)
+[kg] avg_kg      : [-0.01106, 0.0055]
+[K] integrated_K: [-0.2963, 0.4558]
+[eta] range     : [0.0001031, 0.1117]
+[R2] range      : [0.4745, 0.9995]
+  [ 4/30] KK16_1     off 0.006215  (1.3 min)
+[input] Loaded mesh: 50000 verts, 99818 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 15/807 (1.9%)
+[converge] at min size (unsplittable): 78/807 (9.7%)
+[done] 807 patches after splits=123
+[trim] trimmed patches: 0/807 (area frac=0.0000)
+[kg] avg_kg      : [-0.0125, 0.009368]
+[K] integrated_K: [-0.3143, 0.4555]
+[eta] range     : [0.0001645, 0.1276]
+[R2] range      : [0.6192, 0.9993]
+  [ 4/30] KK16_1     on  0.006280  (1.5 min)
+[input] Loaded mesh: 50000 verts, 99779 faces
+[converge] failed quality (R2+eta): 17/803 (2.1%)
+[converge] at min size (unsplittable): 70/803 (8.7%)
+[done] 803 patches after splits=119
+[trim] trimmed patches: 0/803 (area frac=0.0000)
+[kg] avg_kg      : [-0.02619, 0.004892]
+[K] integrated_K: [-0.7722, 0.4882]
+[eta] range     : [0.00207, 0.1851]
+[R2] range      : [0.7388, 0.9992]
+  [ 5/30] KK20_2     off 0.011216  (1.7 min)
+[input] Loaded mesh: 50000 verts, 99779 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 13/796 (1.6%)
+[converge] at min size (unsplittable): 63/796 (7.9%)
+[done] 796 patches after splits=119
+[trim] trimmed patches: 0/796 (area frac=0.0000)
+[kg] avg_kg      : [-0.01665, 0.003922]
+[K] integrated_K: [-0.4618, 0.4881]
+[eta] range     : [0.001947, 0.1283]
+[R2] range      : [0.8186, 0.9992]
+  [ 5/30] KK20_2     on  0.011340  (1.9 min)
+[input] Loaded mesh: 50000 verts, 99744 faces
+[converge] failed quality (R2+eta): 18/857 (2.1%)
+[converge] at min size (unsplittable): 146/857 (17.0%)
+[done] 857 patches after splits=149
+[trim] trimmed patches: 0/857 (area frac=0.0000)
+[kg] avg_kg      : [-0.0155, 0.00559]
+[K] integrated_K: [-0.3545, 0.3241]
+[eta] range     : [0.0001028, 0.08572]
+[R2] range      : [0.6624, 0.9991]
+  [ 6/30] KK24_1     off 0.008740  (2.0 min)
+[input] Loaded mesh: 50000 verts, 99744 faces
+[connected] 0 stray component(s) became their own patch, 7 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 22/878 (2.5%)
+[converge] at min size (unsplittable): 179/878 (20.4%)
+[done] 878 patches after splits=161
+[trim] trimmed patches: 0/878 (area frac=0.0000)
+[kg] avg_kg      : [-0.01453, 0.008059]
+[K] integrated_K: [-0.3582, 0.3234]
+[eta] range     : [0.0001202, 0.07586]
+[R2] range      : [0.2266, 0.9991]
+  [ 6/30] KK24_1     on  0.008541  (2.2 min)
+[input] Loaded mesh: 50000 verts, 99809 faces
+[converge] failed quality (R2+eta): 7/699 (1.0%)
+[converge] at min size (unsplittable): 69/699 (9.9%)
+[done] 699 patches after splits=102
+[trim] trimmed patches: 0/699 (area frac=0.0000)
+[kg] avg_kg      : [-0.004913, 0.003959]
+[K] integrated_K: [-0.2917, 0.3112]
+[eta] range     : [0.0001629, 0.07498]
+[R2] range      : [0.7053, 0.9993]
+  [ 7/30] KK28_11    off 0.012144  (2.4 min)
+[input] Loaded mesh: 50000 verts, 99809 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 2/674 (0.3%)
+[converge] at min size (unsplittable): 34/674 (5.0%)
+[done] 674 patches after splits=92
+[trim] trimmed patches: 0/674 (area frac=0.0000)
+[kg] avg_kg      : [-0.005076, 0.003207]
+[K] integrated_K: [-0.3385, 0.3116]
+[eta] range     : [0.0003892, 0.07499]
+[R2] range      : [0.8285, 0.9991]
+  [ 7/30] KK28_11    on  0.011936  (2.6 min)
+[input] Loaded mesh: 50000 verts, 99813 faces
+[converge] failed quality (R2+eta): 23/785 (2.9%)
+[converge] at min size (unsplittable): 110/785 (14.0%)
+[done] 785 patches after splits=129
+[trim] trimmed patches: 0/785 (area frac=0.0000)
+[kg] avg_kg      : [-0.006452, 0.009481]
+[K] integrated_K: [-0.3434, 0.4053]
+[eta] range     : [7.191e-05, 0.1413]
+[R2] range      : [0.6023, 0.9984]
+  [ 8/30] KK32_0     off 0.010901  (2.8 min)
+[input] Loaded mesh: 50000 verts, 99813 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 22/762 (2.9%)
+[converge] at min size (unsplittable): 76/762 (10.0%)
+[done] 762 patches after splits=118
+[trim] trimmed patches: 0/762 (area frac=0.0000)
+[kg] avg_kg      : [-0.00663, 0.009099]
+[K] integrated_K: [-0.359, 0.4057]
+[eta] range     : [4.773e-05, 0.1564]
+[R2] range      : [0.5744, 0.9979]
+  [ 8/30] KK32_0     on  0.010912  (2.9 min)
+[input] Loaded mesh: 50000 verts, 99768 faces
+[converge] failed quality (R2+eta): 11/799 (1.4%)
+[converge] at min size (unsplittable): 96/799 (12.0%)
+[done] 799 patches after splits=125
+[trim] trimmed patches: 0/799 (area frac=0.0000)
+[kg] avg_kg      : [-0.01282, 0.008067]
+[K] integrated_K: [-0.4839, 0.4055]
+[eta] range     : [0.0001257, 0.09651]
+[R2] range      : [0.4591, 0.9993]
+  [ 9/30] KK40_3     off 0.010782  (3.1 min)
+[input] Loaded mesh: 50000 verts, 99768 faces
+[connected] 0 stray component(s) became their own patch, 11 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 10/782 (1.3%)
+[converge] at min size (unsplittable): 72/782 (9.2%)
+[done] 782 patches after splits=118
+[trim] trimmed patches: 0/782 (area frac=0.0000)
+[kg] avg_kg      : [-0.01326, 0.009115]
+[K] integrated_K: [-0.4831, 0.3686]
+[eta] range     : [3.29e-05, 0.08489]
+[R2] range      : [0.2004, 0.9992]
+  [ 9/30] KK40_3     on  0.010705  (3.3 min)
+[input] Loaded mesh: 50000 verts, 99785 faces
+[converge] failed quality (R2+eta): 13/813 (1.6%)
+[converge] at min size (unsplittable): 38/813 (4.7%)
+[done] 813 patches after splits=109
+[trim] trimmed patches: 0/813 (area frac=0.0000)
+[kg] avg_kg      : [-0.03183, 0.003522]
+[K] integrated_K: [-0.7351, 0.2454]
+[eta] range     : [0.001311, 0.261]
+[R2] range      : [0.7779, 0.9995]
+  [10/30] KK4_2      off 0.005001  (3.5 min)
+[input] Loaded mesh: 50000 verts, 99785 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 7/805 (0.9%)
+[converge] at min size (unsplittable): 29/805 (3.6%)
+[done] 805 patches after splits=108
+[trim] trimmed patches: 0/805 (area frac=0.0000)
+[kg] avg_kg      : [-0.03223, 0.003553]
+[K] integrated_K: [-1.003, 0.2564]
+[eta] range     : [0.002011, 0.1643]
+[R2] range      : [0.6218, 0.9993]
+  [10/30] KK4_2      on  0.005340  (3.7 min)
+[input] Loaded mesh: 50000 verts, 99766 faces
+[converge] failed quality (R2+eta): 9/817 (1.1%)
+[converge] at min size (unsplittable): 40/817 (4.9%)
+[done] 817 patches after splits=115
+[trim] trimmed patches: 0/817 (area frac=0.0000)
+[kg] avg_kg      : [-0.007373, 0.008444]
+[K] integrated_K: [-0.3208, 0.2962]
+[eta] range     : [0.0001877, 0.08413]
+[R2] range      : [0.5263, 0.9993]
+  [11/30] KK5_1      off 0.004246  (3.8 min)
+[input] Loaded mesh: 50000 verts, 99766 faces
+[connected] 0 stray component(s) became their own patch, 1 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 9/823 (1.1%)
+[converge] at min size (unsplittable): 50/823 (6.1%)
+[done] 823 patches after splits=119
+[trim] trimmed patches: 0/823 (area frac=0.0000)
+[kg] avg_kg      : [-0.006515, 0.005277]
+[K] integrated_K: [-0.2753, 0.2962]
+[eta] range     : [0.0003295, 0.06934]
+[R2] range      : [0.4687, 0.9992]
+  [11/30] KK5_1      on  0.004037  (4.0 min)
+[input] Loaded mesh: 50000 verts, 99758 faces
+[converge] failed quality (R2+eta): 10/808 (1.2%)
+[converge] at min size (unsplittable): 34/808 (4.2%)
+[done] 808 patches after splits=110
+[trim] trimmed patches: 0/808 (area frac=0.0000)
+[kg] avg_kg      : [-0.01163, 0.00389]
+[K] integrated_K: [-0.3905, 0.4299]
+[eta] range     : [0.0001345, 0.1196]
+[R2] range      : [0.7248, 0.9993]
+  [12/30] KP20_1     off 0.009261  (4.2 min)
+[input] Loaded mesh: 50000 verts, 99758 faces
+[connected] 0 stray component(s) became their own patch, 6 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 5/810 (0.6%)
+[converge] at min size (unsplittable): 39/810 (4.8%)
+[done] 810 patches after splits=113
+[trim] trimmed patches: 0/810 (area frac=0.0000)
+[kg] avg_kg      : [-0.01214, 0.004092]
+[K] integrated_K: [-0.3619, 0.4299]
+[eta] range     : [0.0001203, 0.08174]
+[R2] range      : [0.7743, 0.999]
+  [12/30] KP20_1     on  0.009093  (4.4 min)
+[input] Loaded mesh: 50000 verts, 99771 faces
+[converge] failed quality (R2+eta): 7/771 (0.9%)
+[converge] at min size (unsplittable): 31/771 (4.0%)
+[done] 771 patches after splits=104
+[trim] trimmed patches: 0/771 (area frac=0.0000)
+[kg] avg_kg      : [-0.007535, 0.00667]
+[K] integrated_K: [-0.3923, 0.3986]
+[eta] range     : [0.0002034, 0.07302]
+[R2] range      : [0.7209, 0.9994]
+  [13/30] KP35_1     off 0.009906  (4.6 min)
+[input] Loaded mesh: 50000 verts, 99771 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 7/765 (0.9%)
+[converge] at min size (unsplittable): 22/765 (2.9%)
+[done] 765 patches after splits=101
+[trim] trimmed patches: 0/765 (area frac=0.0000)
+[kg] avg_kg      : [-0.009339, 0.005082]
+[K] integrated_K: [-0.3719, 0.3986]
+[eta] range     : [0.0004111, 0.07276]
+[R2] range      : [0.4227, 0.9992]
+  [13/30] KP35_1     on  0.009571  (4.8 min)
+[input] Loaded mesh: 50000 verts, 99778 faces
+[converge] failed quality (R2+eta): 4/797 (0.5%)
+[converge] at min size (unsplittable): 59/797 (7.4%)
+[done] 797 patches after splits=114
+[trim] trimmed patches: 0/797 (area frac=0.0000)
+[kg] avg_kg      : [-0.009802, 0.004281]
+[K] integrated_K: [-0.4191, 0.3023]
+[eta] range     : [0.003247, 0.1315]
+[R2] range      : [0.9183, 0.9994]
+  [14/30] KR27_2     off 0.006091  (4.9 min)
+[input] Loaded mesh: 50000 verts, 99778 faces
+[connected] 0 stray component(s) became their own patch, 5 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 6/779 (0.8%)
+[converge] at min size (unsplittable): 35/779 (4.5%)
+[done] 779 patches after splits=108
+[trim] trimmed patches: 0/779 (area frac=0.0000)
+[kg] avg_kg      : [-0.01055, 0.004294]
+[K] integrated_K: [-0.4316, 0.3263]
+[eta] range     : [0.001822, 0.1062]
+[R2] range      : [0.8089, 0.9994]
+  [14/30] KR27_2     on  0.006402  (5.1 min)
+[input] Loaded mesh: 50000 verts, 99812 faces
+[converge] failed quality (R2+eta): 7/779 (0.9%)
+[converge] at min size (unsplittable): 32/779 (4.1%)
+[done] 779 patches after splits=105
+[trim] trimmed patches: 0/779 (area frac=0.0000)
+[kg] avg_kg      : [-0.05331, 0.002873]
+[K] integrated_K: [-1.436, 0.3215]
+[eta] range     : [0.001023, 0.1897]
+[R2] range      : [0.8086, 0.9993]
+  [15/30] KR47_1     off 0.007735  (5.3 min)
+[input] Loaded mesh: 50000 verts, 99812 faces
+[connected] 0 stray component(s) became their own patch, 5 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 8/783 (1.0%)
+[converge] at min size (unsplittable): 38/783 (4.9%)
+[done] 783 patches after splits=107
+[trim] trimmed patches: 0/783 (area frac=0.0000)
+[kg] avg_kg      : [-0.03898, 0.002892]
+[K] integrated_K: [-0.8429, 0.321]
+[eta] range     : [0.001355, 0.1312]
+[R2] range      : [0.903, 0.999]
+  [15/30] KR47_1     on  0.006701  (5.5 min)
+[input] Loaded mesh: 50000 verts, 99744 faces
+[converge] failed quality (R2+eta): 27/817 (3.3%)
+[converge] at min size (unsplittable): 153/817 (18.7%)
+[done] 817 patches after splits=148
+[trim] trimmed patches: 0/817 (area frac=0.0000)
+[kg] avg_kg      : [-0.01424, 0.00658]
+[K] integrated_K: [-0.3529, 0.2847]
+[eta] range     : [9.144e-05, 0.1397]
+[R2] range      : [0.4339, 0.999]
+  [16/30] KR52_1     off 0.008362  (5.6 min)
+[input] Loaded mesh: 50000 verts, 99744 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 44/813 (5.4%)
+[converge] at min size (unsplittable): 148/813 (18.2%)
+[done] 813 patches after splits=147
+[trim] trimmed patches: 0/813 (area frac=0.0000)
+[kg] avg_kg      : [-0.01481, 0.006687]
+[K] integrated_K: [-0.3846, 0.2849]
+[eta] range     : [6.853e-05, 0.1687]
+[R2] range      : [0.381, 0.9988]
+  [16/30] KR52_1     on  0.008406  (5.8 min)
+[input] Loaded mesh: 50000 verts, 99809 faces
+[converge] failed quality (R2+eta): 12/800 (1.5%)
+[converge] at min size (unsplittable): 60/800 (7.5%)
+[done] 800 patches after splits=120
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.01522, 0.005295]
+[K] integrated_K: [-0.6252, 0.3915]
+[eta] range     : [0.0003887, 0.1648]
+[R2] range      : [0.7434, 0.9993]
+  [17/30] KR6_1      off 0.009939  (6.0 min)
+[input] Loaded mesh: 50000 verts, 99809 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 10/786 (1.3%)
+[converge] at min size (unsplittable): 35/786 (4.5%)
+[done] 786 patches after splits=109
+[trim] trimmed patches: 0/786 (area frac=0.0000)
+[kg] avg_kg      : [-0.01413, 0.006541]
+[K] integrated_K: [-0.5148, 0.3345]
+[eta] range     : [0.0007661, 0.1163]
+[R2] range      : [0.8107, 0.9991]
+  [17/30] KR6_1      on  0.009428  (6.2 min)
+[input] Loaded mesh: 50000 verts, 99781 faces
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.00765, 0.004077]
+[K] integrated_K: [-0.3521, 0.2136]
+[eta] range     : [0.01361, 0.07253]
+[R2] range      : [0.9559, 0.9993]
+  [18/30] KR73_1     off 0.003918  (6.4 min)
+[input] Loaded mesh: 50000 verts, 99781 faces
+[connected] 0 stray component(s) became their own patch, 5 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/801 (0.0%)
+[converge] at min size (unsplittable): 2/801 (0.2%)
+[done] 801 patches after splits=101
+[trim] trimmed patches: 0/801 (area frac=0.0000)
+[kg] avg_kg      : [-0.007555, 0.003928]
+[K] integrated_K: [-0.3284, 0.1796]
+[eta] range     : [0.007551, 0.07038]
+[R2] range      : [0.9297, 0.9991]
+  [18/30] KR73_1     on  0.003732  (6.5 min)
+[input] Loaded mesh: 50000 verts, 99747 faces
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.003473, 0.002734]
+[K] integrated_K: [-0.1547, 0.1093]
+[eta] range     : [0.01052, 0.07401]
+[R2] range      : [0.9578, 0.9992]
+  [19/30] KY153_1    off 0.001658  (6.7 min)
+[input] Loaded mesh: 50000 verts, 99747 faces
+[connected] 0 stray component(s) became their own patch, 5 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/801 (0.0%)
+[converge] at min size (unsplittable): 2/801 (0.2%)
+[done] 801 patches after splits=101
+[trim] trimmed patches: 0/801 (area frac=0.0000)
+[kg] avg_kg      : [-0.003498, 0.00263]
+[K] integrated_K: [-0.1459, 0.1053]
+[eta] range     : [0.004401, 0.05041]
+[R2] range      : [0.9194, 0.9992]
+  [19/30] KY153_1    on  0.001636  (6.9 min)
+[input] Loaded mesh: 50000 verts, 99766 faces
+[converge] failed quality (R2+eta): 2/802 (0.2%)
+[converge] at min size (unsplittable): 24/802 (3.0%)
+[done] 802 patches after splits=106
+[trim] trimmed patches: 0/802 (area frac=0.0000)
+[kg] avg_kg      : [-0.009774, 0.006042]
+[K] integrated_K: [-0.2616, 0.3366]
+[eta] range     : [0.002359, 0.07208]
+[R2] range      : [0.845, 0.9995]
+  [20/30] KY160_1    off 0.004162  (7.1 min)
+[input] Loaded mesh: 50000 verts, 99766 faces
+[connected] 0 stray component(s) became their own patch, 2 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/793 (0.0%)
+[converge] at min size (unsplittable): 11/793 (1.4%)
+[done] 793 patches after splits=102
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.0112, 0.005772]
+[K] integrated_K: [-0.4347, 0.2836]
+[eta] range     : [0.002752, 0.07469]
+[R2] range      : [0.9174, 0.9993]
+  [20/30] KY160_1    on  0.004255  (7.3 min)
+[input] Loaded mesh: 50000 verts, 99735 faces
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.006324, 0.00445]
+[K] integrated_K: [-0.2478, 0.1659]
+[eta] range     : [0.006306, 0.07034]
+[R2] range      : [0.9405, 0.9993]
+  [21/30] KY183_1    off 0.001843  (7.5 min)
+[input] Loaded mesh: 50000 verts, 99735 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.00611, 0.004407]
+[K] integrated_K: [-0.2359, 0.1516]
+[eta] range     : [0.005355, 0.06034]
+[R2] range      : [0.9529, 0.9992]
+  [21/30] KY183_1    on  0.001789  (7.7 min)
+[input] Loaded mesh: 50000 verts, 99767 faces
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.00465, 0.002206]
+[K] integrated_K: [-0.238, 0.09665]
+[eta] range     : [0.009036, 0.07195]
+[R2] range      : [0.9561, 0.9993]
+  [22/30] KY186_1    off 0.001680  (7.9 min)
+[input] Loaded mesh: 50000 verts, 99767 faces
+[connected] 0 stray component(s) became their own patch, 2 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.004125, 0.002283]
+[K] integrated_K: [-0.1971, 0.1024]
+[eta] range     : [0.008241, 0.05909]
+[R2] range      : [0.9432, 0.9992]
+  [22/30] KY186_1    on  0.001631  (8.0 min)
+[input] Loaded mesh: 50000 verts, 99745 faces
+[converge] failed quality (R2+eta): 0/786 (0.0%)
+[converge] at min size (unsplittable): 0/786 (0.0%)
+[done] 786 patches after splits=98
+[trim] trimmed patches: 0/786 (area frac=0.0000)
+[kg] avg_kg      : [-0.008346, 0.00393]
+[K] integrated_K: [-0.2232, 0.3403]
+[eta] range     : [0.005984, 0.07412]
+[R2] range      : [0.965, 0.9992]
+  [23/30] KY215_1    off 0.002874  (8.2 min)
+[input] Loaded mesh: 50000 verts, 99745 faces
+[connected] 0 stray component(s) became their own patch, 6 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/786 (0.0%)
+[converge] at min size (unsplittable): 0/786 (0.0%)
+[done] 786 patches after splits=98
+[trim] trimmed patches: 0/786 (area frac=0.0000)
+[kg] avg_kg      : [-0.00816, 0.003848]
+[K] integrated_K: [-0.2006, 0.3403]
+[eta] range     : [0.005833, 0.07412]
+[R2] range      : [0.9463, 0.9988]
+  [23/30] KY215_1    on  0.002826  (8.4 min)
+[input] Loaded mesh: 50000 verts, 99749 faces
+[converge] failed quality (R2+eta): 2/812 (0.2%)
+[converge] at min size (unsplittable): 21/812 (2.6%)
+[done] 812 patches after splits=109
+[trim] trimmed patches: 0/812 (area frac=0.0000)
+[kg] avg_kg      : [-0.005452, 0.009199]
+[K] integrated_K: [-0.2352, 0.297]
+[eta] range     : [0.004303, 0.07454]
+[R2] range      : [0.8557, 0.9986]
+  [24/30] KY228_1    off 0.004175  (8.6 min)
+[input] Loaded mesh: 50000 verts, 99749 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/810 (0.0%)
+[converge] at min size (unsplittable): 16/810 (2.0%)
+[done] 810 patches after splits=106
+[trim] trimmed patches: 0/810 (area frac=0.0000)
+[kg] avg_kg      : [-0.005468, 0.00944]
+[K] integrated_K: [-0.2379, 0.2925]
+[eta] range     : [0.004121, 0.07408]
+[R2] range      : [0.9004, 0.9981]
+  [24/30] KY228_1    on  0.003946  (8.8 min)
+[input] Loaded mesh: 50000 verts, 99727 faces
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.004424, 0.005782]
+[K] integrated_K: [-0.1915, 0.2007]
+[eta] range     : [0.007632, 0.07422]
+[R2] range      : [0.9369, 0.9994]
+  [25/30] KY238_1    off 0.001635  (9.0 min)
+[input] Loaded mesh: 50000 verts, 99727 faces
+[connected] 0 stray component(s) became their own patch, 6 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.004499, 0.005966]
+[K] integrated_K: [-0.1824, 0.1868]
+[eta] range     : [0.00802, 0.06504]
+[R2] range      : [0.9157, 0.9993]
+  [25/30] KY238_1    on  0.001528  (9.1 min)
+[input] Loaded mesh: 50000 verts, 99779 faces
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.006096, 0.004851]
+[K] integrated_K: [-0.1816, 0.1285]
+[eta] range     : [0.01211, 0.06698]
+[R2] range      : [0.9492, 0.9993]
+  [26/30] KY240_1    off 0.001675  (9.3 min)
+[input] Loaded mesh: 50000 verts, 99779 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/800 (0.0%)
+[converge] at min size (unsplittable): 0/800 (0.0%)
+[done] 800 patches after splits=100
+[trim] trimmed patches: 0/800 (area frac=0.0000)
+[kg] avg_kg      : [-0.006052, 0.004297]
+[K] integrated_K: [-0.1621, 0.1281]
+[eta] range     : [0.01144, 0.053]
+[R2] range      : [0.9392, 0.999]
+  [26/30] KY240_1    on  0.001630  (9.5 min)
+[input] Loaded mesh: 50000 verts, 99733 faces
+[converge] failed quality (R2+eta): 0/793 (0.0%)
+[converge] at min size (unsplittable): 0/793 (0.0%)
+[done] 793 patches after splits=99
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.005394, 0.002829]
+[K] integrated_K: [-0.2107, 0.2892]
+[eta] range     : [0.003571, 0.06825]
+[R2] range      : [0.9483, 0.9993]
+  [27/30] KY244_1    off 0.002608  (9.7 min)
+[input] Loaded mesh: 50000 verts, 99733 faces
+[connected] 0 stray component(s) became their own patch, 3 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/795 (0.0%)
+[converge] at min size (unsplittable): 3/795 (0.4%)
+[done] 795 patches after splits=100
+[trim] trimmed patches: 0/795 (area frac=0.0000)
+[kg] avg_kg      : [-0.00545, 0.002689]
+[K] integrated_K: [-0.2163, 0.2889]
+[eta] range     : [0.003573, 0.06825]
+[R2] range      : [0.9116, 0.9991]
+  [27/30] KY244_1    on  0.002546  (9.8 min)
+[input] Loaded mesh: 50000 verts, 99771 faces
+[converge] failed quality (R2+eta): 0/772 (0.0%)
+[converge] at min size (unsplittable): 0/772 (0.0%)
+[done] 772 patches after splits=96
+[trim] trimmed patches: 0/772 (area frac=0.0000)
+[kg] avg_kg      : [-0.0081, 0.005744]
+[K] integrated_K: [-0.3557, 0.1854]
+[eta] range     : [0.008118, 0.07214]
+[R2] range      : [0.9075, 0.9994]
+  [28/30] KY68_1     off 0.002869  (10.0 min)
+[input] Loaded mesh: 50000 verts, 99771 faces
+[connected] 0 stray component(s) became their own patch, 5 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/772 (0.0%)
+[converge] at min size (unsplittable): 0/772 (0.0%)
+[done] 772 patches after splits=96
+[trim] trimmed patches: 0/772 (area frac=0.0000)
+[kg] avg_kg      : [-0.008048, 0.005914]
+[K] integrated_K: [-0.3558, 0.1449]
+[eta] range     : [0.00718, 0.06784]
+[R2] range      : [0.9075, 0.9992]
+  [28/30] KY68_1     on  0.002774  (10.2 min)
+[input] Loaded mesh: 50000 verts, 99768 faces
+[converge] failed quality (R2+eta): 0/793 (0.0%)
+[converge] at min size (unsplittable): 0/793 (0.0%)
+[done] 793 patches after splits=99
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.01079, 0.01181]
+[K] integrated_K: [-0.2349, 0.2718]
+[eta] range     : [0.006602, 0.07083]
+[R2] range      : [0.933, 0.9992]
+  [29/30] KY7_1      off 0.001795  (10.3 min)
+[input] Loaded mesh: 50000 verts, 99768 faces
+[connected] 0 stray component(s) became their own patch, 4 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 0/793 (0.0%)
+[converge] at min size (unsplittable): 0/793 (0.0%)
+[done] 793 patches after splits=99
+[trim] trimmed patches: 0/793 (area frac=0.0000)
+[kg] avg_kg      : [-0.01054, 0.01535]
+[K] integrated_K: [-0.1949, 0.2732]
+[eta] range     : [0.007427, 0.05773]
+[R2] range      : [0.9175, 0.999]
+  [29/30] KY7_1      on  0.001696  (10.5 min)
+[input] Loaded mesh: 50000 verts, 99769 faces
+[converge] failed quality (R2+eta): 1/813 (0.1%)
+[converge] at min size (unsplittable): 22/813 (2.7%)
+[done] 813 patches after splits=109
+[trim] trimmed patches: 0/813 (area frac=0.0000)
+[kg] avg_kg      : [-0.01197, 0.009982]
+[K] integrated_K: [-0.261, 0.169]
+[eta] range     : [0.002687, 0.07426]
+[R2] range      : [0.8964, 0.9986]
+  [30/30] SA21_1     off 0.002157  (10.7 min)
+[input] Loaded mesh: 50000 verts, 99769 faces
+[connected] 0 stray component(s) became their own patch, 2 too small and merged into a neighbour
+[converge] failed quality (R2+eta): 1/811 (0.1%)
+[converge] at min size (unsplittable): 18/811 (2.2%)
+[done] 811 patches after splits=107
+[trim] trimmed patches: 0/811 (area frac=0.0000)
+[kg] avg_kg      : [-0.01256, 0.01155]
+[K] integrated_K: [-0.3419, 0.1503]
+[eta] range     : [0.003269, 0.07129]
+[R2] range      : [0.8434, 0.9985]
+  [30/30] SA21_1     on  0.002198  (10.9 min)
+
+==============================================================================
+UNBRANCHED COHORT, 30 cases, trim 0, both fixes OFF vs ON
+==============================================================================
+case        group             OFF         ON   ON/OFF   disc
+KY238_1     normal       0.001635   0.001528    0.935     -1
+KY240_1     normal       0.001675   0.001630    0.973     -1
+KY186_1     normal       0.001680   0.001631    0.971     -1
+KY153_1     normal       0.001658   0.001636    0.986     -1
+KY7_1       normal       0.001795   0.001696    0.945     -1
+KY183_1     normal       0.001843   0.001789    0.971     -1
+SA21_1      normal       0.002157   0.002198    1.019     -1
+KY244_1     normal       0.002608   0.002546    0.976     -1
+KY68_1      normal       0.002869   0.002774    0.967     -1
+KY215_1     normal       0.002874   0.002826    0.983     -1
+KR73_1      diseased     0.003918   0.003732    0.953     -1
+KK15_1      diseased     0.004001   0.003895    0.973     -1
+DJ8_1       diseased     0.003945   0.003906    0.990     -1
+KY228_1     normal       0.004175   0.003946    0.945     -1
+KK5_1       diseased     0.004246   0.004037    0.951     -1
+KY160_1     normal       0.004162   0.004255    1.022     -1
+KK4_2       diseased     0.005001   0.005340    1.068     -1
+DJ18_2      diseased     0.005696   0.005754    1.010     -1
+KK16_1      diseased     0.006215   0.006280    1.011     -1
+KR27_2      diseased     0.006091   0.006402    1.051     -1
+KR47_1      diseased     0.007735   0.006701    0.866     -1
+KR52_1      diseased     0.008362   0.008406    1.005     -1
+KK24_1      diseased     0.008740   0.008541    0.977     -1
+KP20_1      diseased     0.009261   0.009093    0.982     -1
+KR6_1       diseased     0.009939   0.009428    0.949     -1
+KP35_1      diseased     0.009906   0.009571    0.966     -1
+KK40_3      diseased     0.010782   0.010705    0.993     -1
+KK32_0      diseased     0.010901   0.010912    1.001     -1
+KK20_2      diseased     0.011216   0.011340    1.011     -1
+KK28_11     diseased     0.012144   0.011936    0.983     -1
+
+  median ON/OFF ratio : 0.9796
+  worst move          : 13.4% (KR47_1)
+  cases moving >10%   : 1 of 30
+  cases moving >2%    : 18 of 30
+  rank correlation    : rho +0.9960  (p 6.5e-31)
+  OFF  normals 0.002428 (band 0.67-1.72, CV 0.386)  diseased 4.02x normals
+  ON   normals 0.002371 (band 0.64-1.79, CV 0.394)  diseased 3.79x normals

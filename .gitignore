@@ -1,0 +1,47 @@
+.conda-env/
+results/gui_normals_split/
+results/cardiac_delta_k_gui/
+
+# Python and macOS filesystem artifacts
+__pycache__/
+*.py[cod]
+.DS_Store
+._*
+
+# Large source and derived surface meshes
+*.stl
+*.vtk
+*.vtp
+*.obj
+*.ply
+*.off
+*.mesh
+*.msh
+
+# Patient datasets and scan volumes (keep local; do not commit)
+/dataset/
+/datasets/
+**/dataset/
+**/datasets/
+/results/
+*.dcm
+*.dicom
+*.nii
+*.nii.gz
+*.nrrd
+*.mha
+*.mhd
+*.mat
+
+# Local cohort tables, vendor sample data, and exported vendor analyses
+/camp/camp/*.csv
+/camp/vascular-cut/*.zip
+/vascular-cut/Geometries & Meshes/
+/vascular-cut/KK2_5.*
+/vascular-cut/KY160_1_CentrelinePoints.csv
+/vascular-cut/tools/*.csv
+
+# Regenerable CAMP viewer and per-face/packed mesh outputs
+*.npz
+*.html
+*_facepatches.csv

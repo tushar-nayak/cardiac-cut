@@ -1,0 +1,16 @@
+# CAMP Toolkit dependencies.
+# Trailing comments are the exact versions this was tested against
+# (Anaconda, Python 3.11).  Version floors are conservative.
+
+numpy>=1.24          # 1.26.4
+scipy>=1.10          # 1.15.3   (scipy.io reads/writes the CAMP .mat handoff)
+pandas>=2.0          # 2.1.4
+scikit-learn>=1.2    # 1.2.2    (KMeans seeding + splitting)
+trimesh>=4.0         # 4.4.1    (STL load + welding + topology)
+pyvista>=0.44        # 0.45.2   (mesh container for ACVD; static PNG render)
+pyacvd>=0.3.1        # 0.3.3    (uniform remeshing)
+plotly>=5.9          # 5.9.0    (interactive HTML viewer)
+matplotlib>=3.7      # 3.8.0    (colormaps; PNG colors)
+
+# to run the notebook itself:
+notebook>=6.5

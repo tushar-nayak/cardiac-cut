@@ -1,0 +1,29 @@
+# Makes the tool pip-installable and provides the `vascular-cut` command.
+#
+#   pip install .           ->  installs the `vascular-cut` launcher
+#   pip install -e .        ->  same, but editable (for development)
+#   uv run vascular-cut     ->  uv auto-creates the env and runs it
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vascular-cut"
+version = "0.1.0"
+description = "Interactive centerline-driven cutting of vascular surface meshes into open meshes"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dynamic = ["dependencies"]              # single source of truth: requirements.txt
+
+[project.scripts]
+vascular-cut = "branch_gui:main"
+
+[tool.setuptools]
+py-modules = ["branch_gui", "branch_cut", "branch_tree"]
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements.txt"] }
+
+# Optional: the ACVD uniform remesh path (not used by the GUI, off by default).
+[project.optional-dependencies]
+remesh = ["pyacvd"]

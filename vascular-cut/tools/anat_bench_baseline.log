@@ -1,0 +1,91 @@
+  family label: 1 for this cohort
+  70 case(s) under Y:/aorta/abdominal/MK/JK
+
+case          fam   route  frac  namd  ren  pre  flags
+JK10_1          1     173  0.60    11    2    5  
+JK10_2          1     174  0.61     6    2    5  
+JK10_3          1     152  0.58    10    2    5  renals were a choice
+JK11_1          1     203  0.76     8    2    5  
+JK12_2          1     170  0.66    11    2    5  
+JK12_3          1     155  0.57    11    2    5  
+JK12_4          1     166  0.60    11    2    5  
+JK13_1          1     176  0.56    11    2    5  
+JK13_3          1     155  0.54    11    2    5  
+JK14_1          1     135  0.54     9    0    2  no renals; only 2 preset(s)
+JK14_2          1     152  0.59    11    2    5  
+JK14_3          1     136  0.54    10    2    5  
+JK17_1          1     172  0.73     9    2    5  
+JK17_2          1     156  0.66    11    2    5  
+JK17_3          1     157  0.70     9    2    5  
+JK1_1           1     178  0.62    10    2    5  
+JK1_2           1     182  0.63    10    2    5  
+JK1_3           1     182  0.61    10    2    5  
+JK20_1          1     150  0.66     4    2    5  renals were a choice
+JK20_2          1     165  0.64     6    2    4  renals were a choice
+JK23_1          1     178  0.67     7    2    3  only 3 preset(s)
+JK23_3          1     178  0.62     7    0    2  no renals; only 2 preset(s)
+JK24_1          1     176  0.63     7    2    4  renals were a choice
+JK24_2          1     170  0.62     8    2    4  renals were a choice
+JK24_3          1     173  0.61     7    2    4  renals were a choice
+JK25_1          2     266  1.17     2    0    1  FAMILY: called 2, labelled 1; close family call; only 1 preset(s)
+JK25_2          1     122  0.50     3    2    2  close family call; renals were a choice; only 2 preset(s)
+JK25_3          1     140  0.59     6    2    5  renals were a choice
+JK26_1          1     178  0.74    11    2    5  
+JK26_2          1     182  0.70    11    2    5  
+JK26_3          1     167  0.69    11    2    4  
+JK2_1           1     173  0.61     7    2    4  
+JK2_2           1     162  0.59     7    2    4  
+JK2_3           1     180  0.68     7    2    4  
+JK30_1          1     198  0.75    10    2    5  
+JK30_3          1     192  0.74    10    2    5  renals were a choice
+JK30_4          1     176  0.83     6    2    3  renals were a choice; only 3 preset(s)
+JK30_5          1     179  0.72    10    2    5  renals were a choice
+JK34_1          1     162  0.63    10    2    5  
+JK34_2          1     161  0.62    10    2    5  
+JK34_4          1     170  0.63    10    2    5  
+JK34_5          1     147  0.53    10    2    5  renals were a choice
+JK36_1          1     178  0.59     9    2    5  
+JK36_2          1     177  0.57     7    2    5  
+JK36_4          1     165  0.54    11    2    5  
+JK36_5          1     182  0.57     9    2    5  
+JK39_1          1     164  0.65    10    2    5  renals were a choice
+JK39_2          1     161  0.62    10    2    5  renals were a choice
+JK39_3          1     150  0.59    10    2    5  renals were a choice
+JK3_1           1     214  0.79    10    2    5  
+JK3_2           1     185  0.57    10    2    4  renals were a choice
+JK3_3           1     223  0.76    10    2    5  
+JK40_1          1     179  0.64    11    2    5  
+JK40_2          1     177  0.59    10    2    5  renals were a choice
+JK40_3          1     180  0.61    10    2    5  
+JK46_1          1     208  0.74    11    2    5  
+JK46_2          1     207  0.70    11    2    5  
+JK46_5          1     186  0.64    11    2    5  
+JK47_1          1     211  0.75    11    2    5  
+JK47_2          1     206  0.69    10    2    5  
+JK47_3          1     219  0.70    10    2    3  renals were a choice; only 3 preset(s)
+JK47_4          1     200  0.68    10    2    3  renals were a choice; only 3 preset(s)
+JK4_1           1     178  0.65    10    2    5  renals were a choice
+JK4_2           1     154  0.54    10    2    5  renals were a choice
+JK4_3           1     171  0.60    10    2    5  renals were a choice
+JK5_1           1     208  0.65    11    2    5  
+JK5_2           1     186  0.61    11    2    5  
+JK6_1           1     190  0.74     9    2    5  
+JK6_2           1     167  0.61     6    2    5  
+JK8_4           1     188  0.57    11    2    5  
+
+====================================================================
+ANATOMY BENCHMARK
+====================================================================
+  cases scored                               70
+  raised an exception                         0
+  family called correctly                    69   of 70 labelled
+  close family calls                          2
+  no aortic route at all                      0
+  route under half the model                  0
+  abdominals with renals named               67
+  ...of which were a choice                  22
+  cases with 4+ region presets               62
+  region presets offered                    320
+  openings named                            645
+
+  appended to tools\anat_bench_midx.jsonl

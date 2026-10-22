@@ -1,0 +1,10 @@
+{"n_patches": 934, "faces": 50000, "area": 7752.127045621343, "dk": {"0.0": 0.17981127165330768, "0.0025": 0.021251617172529404}, "case": "KK15_1", "mode": "density"}
+{"n_patches": 1751, "faces": 100000, "area": 7783.557079285691, "dk": {"0.0": 0.16521588767030101, "0.0025": 0.008614265132223048}, "case": "KK15_1", "mode": "density"}
+{"n_patches": 708, "faces": 50000, "area": 13466.215837903272, "dk": {"0.0": 0.35473289865344515, "0.0025": 0.036319749910742834}, "case": "KK40_3", "mode": "density"}
+{"n_patches": 1125, "faces": 100000, "area": 13496.895297379484, "dk": {"0.0": 0.017566966439150695, "0.0025": 0.010046270360039541}, "case": "KK40_3", "mode": "density"}
+{"error": "ValueError: all the input array dimensions except for the concatenation axis must match exactly, but along dimension 1, the array at index 0 has size 3 and the array at index 555 has size 1", "case": "KR47_1", "faces": 50000, "mode": "density"}
+{"n_patches": 1514, "faces": 100000, "area": 10503.448821814585, "dk": {"0.0": 0.04092366174671763, "0.0025": 0.008863725679059187}, "case": "KR47_1", "mode": "density"}
+{"n_patches": 729, "faces": 50000, "area": 5481.478112552355, "dk": {"0.0": 25.097519875436078, "0.0025": 0.33311540767002457}, "case": "KY183_1", "mode": "density"}
+{"n_patches": 1389, "faces": 100000, "area": 5501.576569881224, "dk": {"0.0": 0.008379868670747454, "0.0025": 0.005128533257233895}, "case": "KY183_1", "mode": "density"}
+{"n_patches": 741, "faces": 50000, "area": 6116.503393468221, "dk": {"0.0": 1.4155916266429234, "0.0025": 0.008419853797568507}, "case": "KY244_1", "mode": "density"}
+{"n_patches": 1035, "faces": 100000, "area": 6130.036147150951, "dk": {"0.0": 0.028670050636098718, "0.0025": 0.005546991624158565}, "case": "KY244_1", "mode": "density"}

@@ -1,0 +1,58 @@
+# Pinned dependencies for the vascular cut tool, the authoritative list.
+# These exact versions are the ones the tool was developed and verified against
+# (Python 3.11). Every one ships prebuilt wheels for Windows / macOS / Linux on
+# Python 3.10–3.12, so `pip install -r requirements.txt` needs no compiler.
+#
+# Python 3.13+ is NOT yet supported: several of these have no wheels there and
+# would try (and fail) to build from source. Use Python 3.10, 3.11, or 3.12.
+
+numpy==2.4.6
+scipy==1.17.1
+pandas==3.0.3
+trimesh==4.12.2
+shapely==2.1.2          # trimesh needs this for planar slicing (the cut itself)
+rtree==1.4.1            # spatial index for trimesh proximity queries
+manifold3d==3.5.2       # trimesh mesh-repair / boolean backend
+pyvista==0.48.4         # 3-D rendering (pulls in VTK)
+matplotlib==3.11.0      # pyvista requires it; also where the patch colour maps come from
+pyvistaqt==0.12.0       # embeds the PyVista view inside the Qt window
+qtpy==2.4.3             # Qt abstraction layer
+PySide6==6.11.1         # the actual Qt binding
+pyacvd==0.4.0           # uniform surface remeshing (cutclean.acvd_uniform_remesh)
+
+# Web front end. Not needed to run the desktop tool.
+#
+# trame serves the SAME VTK pipeline the desktop window uses, rendered on the
+# server and streamed to the browser, which is what lets the web version keep the
+# interactive cut planes rather than settling for a static preview.
+trame==3.13.2
+trame-vtk==2.11.8
+trame-vuetify==3.2.2
+trame-components==2.5.0
+# Pinned although they arrive through trame, because the hosted mode leans on their
+# internals: cut_app.py caps websocket messages by patching wslink's un-chunker, and
+# webapp/visit_gate.py (one visitor per process) answers trame-client's connect
+# request and hooks wslink's handshake and message handler. Re-run
+# tests/test_visit_gate.py and tests/web/check_privacy.py before moving any of these.
+wslink==2.5.7
+trame-server==3.12.5
+trame-client==3.13.2
+aiohttp==3.14.1
+# Both sections live in webapp/cut_app.py. The two below are only for webapp/app.py,
+# the plain Streamlit version that predates it.
+streamlit==1.60.0
+plotly==6.9.0           # CAMP's own patch figure, which the trame app does not use
+
+# Curvature metrics (shape_metrics.py). CAMP is not on PyPI, so it is vendored
+# under camp/ as a verbatim copy of the lab's campsrc.py -- see camp/README.md for
+# its provenance and hash. Nothing below installs CAMP; these are what it needs to
+# run. Set CAMP_SRC to point at a different build without touching the repository.
+scikit-learn==1.9.0     # k-means seeding for the patch partition
+joblib==1.5.3
+threadpoolctl==3.6.0    # pins each run to one thread so batches stay predictable
+
+# The zone bench only -- neither front end needs it. zone_map.py, zone_gallery.py,
+# zone_score_shots.py and zone_stub_pairs.py write their PNGs through it. It is
+# already present here as a transitive dependency of scikit-image; pinned so that
+# stays true.
+imageio==2.37.3
