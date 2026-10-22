@@ -9,6 +9,7 @@ import hashlib
 import importlib.util
 import json
 import re
+import tempfile
 import threading
 import uuid
 from datetime import datetime, timezone
@@ -440,7 +441,7 @@ byId('case').addEventListener('change',e=>loadCase(e.target.value));byId('planeM
 function cameraFor(view){if(view==='front')return {eye:{x:2.2,y:0,z:.08},up:{x:0,y:0,z:1},center:{x:0,y:0,z:0}};if(view==='side')return {eye:{x:0,y:2.2,z:.08},up:{x:0,y:0,z:1},center:{x:0,y:0,z:0}};if(view==='top')return {eye:{x:0,y:0,z:2.2},up:{x:0,y:1,z:0},center:{x:0,y:0,z:0}};return {eye:{x:1.6,y:1.6,z:1.25},up:{x:0,y:0,z:1},center:{x:0,y:0,z:0}}}
 function setView(view){let camera=cameraFor(view);lastCamera=copyCamera(camera);Promise.all(['inner','outer'].map(id=>applyViewState(id,camera)))}
 function updateAppearance(){if(!caseData)return;renderBoth()}
-function renderCampStatus(){let rows=campData.summary.rows,parts=rows.map(r=>`${r.stem.endsWith('_inner')?'inner':'outer'}: ${r.n_patches} patches · k fluct ${Number(r.k_fluct).toPrecision(3)} · failed QC ${Number(r.pct_failed_quality).toFixed(1)}%`);status.textContent='CAMP complete · '+parts.join(' | ')}
+function renderCampStatus(){let rows=campData.summary.rows,parts=rows.map(r=>`${r.stem.endsWith('_inner')?'inner':'outer'}: ${r.n_patches} patches · k fluct ${Number(r.k_fluct).toPrecision(3)} · failed QC ${Number(r.pct_failed_quality).toFixed(1)}%`),cleaned=rows.filter(r=>r.discarded_components>0).map(r=>`${r.stem.endsWith('_inner')?'inner':'outer'} ignored ${r.discarded_components} tiny detached fragments (${Number(r.discarded_area_pct).toFixed(2)}% area)`);status.textContent='CAMP complete · '+parts.join(' | ')+(cleaned.length?' · '+cleaned.join('; '):'')}
 async function runCamp(){if(!caseData)return;let button=byId('runCamp');button.disabled=true;status.classList.remove('error');status.textContent='Saving reviewed surfaces, then running canonical CAMP on inner and outer…';for(let id of ['case','planeMode','side','off','az','el','ox','oy','oz','applyInner','save'])byId(id).disabled=true;try{let request=await fetch('/api/run_camp',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({case:caseData.case,origin:currentOrigin(),normal:vecFromAngles(),keep_side:byId('side').value,split_method:byId('planeMode').value,apply_cut_to_inner:byId('applyInner').checked,target_faces:Number(byId('targetFaces').value)})}),result=await request.json();if(!request.ok)throw new Error(result.error||'CAMP failed');status.textContent='Loading CAMP patch meshes…';let response=await fetch('/api/camp_mesh?case='+encodeURIComponent(caseData.case)),data=await response.json();if(!response.ok)throw new Error(data.error||'Could not load CAMP meshes');campData=data;byId('campOption').disabled=false;byId('displayMode').value='camp';await renderBoth();renderCampStatus()}catch(e){status.textContent='CAMP failed: '+e.message;status.classList.add('error')}finally{for(let id of ['case','planeMode','side','off','az','el','ox','oy','oz','applyInner','save'])byId(id).disabled=false;byId('side').disabled=byId('planeMode').value==='manual';byId('applyInner').disabled=byId('planeMode').value==='manual';button.disabled=false}}
 byId('colorMode').addEventListener('change',updateAppearance);byId('contours').addEventListener('change',updateAppearance);byId('campField').addEventListener('change',updateAppearance);byId('campEdges').addEventListener('change',updateAppearance);byId('displayMode').addEventListener('change',()=>{if(byId('displayMode').value==='camp'&&!campData)byId('displayMode').value='cut';updateAppearance();if(campData&&byId('displayMode').value==='camp')renderCampStatus()});['showInner','showOuter','showRemoved','showPlane','showMeasurePlane'].forEach(id=>byId(id).addEventListener('change',updateAppearance));byId('measureButton').addEventListener('click',measureSection);byId('measureOffset').addEventListener('input',()=>{byId('measureOffsetValue').value=byId('measureOffset').value+' mm';if(measureResult){byId('measurement').textContent='Measurement plane moved; click Measure to update the readings.';moveMeasurePlane()}});byId('runCamp').addEventListener('click',runCamp);byId('applyInner').addEventListener('change',()=>{invalidateCamp();updateInnerNote()});document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 byId('preview').addEventListener('click',refresh);byId('reset').addEventListener('click',()=>{if(caseData)loadCase(caseData.case)});
@@ -843,20 +844,57 @@ def make_handler(split_dir: Path, output_dir: Path, input_dir: Path | None = Non
             spec = importlib.util.spec_from_file_location("cardiac_delta_k_runner", runner_path)
             runner = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(runner)
-            run_stl, camp_source = runner.load_camp()
+            # Use the current batch runner API: load CAMP once, then process
+            # each reviewed STL with the same implementation as batch runs.
+            shape_metrics = runner.use_camp()
             camp_results_dir.mkdir(parents=True, exist_ok=True)
             rows = []
             for side in ("inner", "outer"):
                 stl = output_dir / case / f"{case}_{side}.stl"
-                row = run_stl(stl, camp_results_dir, target_faces=target_faces,
-                              trim_frac=0.01, save_html=False, save_png=False,
-                              verbose=False, campsrc_module=camp_source)
+                import trimesh
+                source = shape_metrics.weld(trimesh.load(str(stl), process=False))
+                components = sorted(source.split(only_watertight=False),
+                                    key=lambda part: part.area, reverse=True)
+                total_area = float(sum(part.area for part in components))
+                kept_area = float(components[0].area) if components else 0.0
+                discarded = components[1:]
+                discarded_area = max(total_area - kept_area, 0.0)
+                discarded_pct = (100.0 * discarded_area / total_area
+                                 if total_area > 0 else 0.0)
+                largest_fragment_pct = (100.0 * max((part.area for part in discarded),
+                                                    default=0.0) / total_area
+                                        if total_area > 0 else 0.0)
+                if largest_fragment_pct > 0.5 or discarded_pct > 2.0:
+                    raise RuntimeError(
+                        f"{side} surface has {len(components)} connected components; "
+                        f"the largest detached fragment is {largest_fragment_pct:.2f}% "
+                        f"(limit 0.50%) and all detached fragments total "
+                        f"{discarded_pct:.2f}% of area (limit 2.00%). "
+                        "Review or clean the split before running CAMP."
+                    )
+                # VTK clipping can leave tiny disconnected slivers in the saved STL.
+                # CAMP gets the largest anatomical surface only; retain the source
+                # STL unchanged and record every discarded component in the summary.
+                with tempfile.TemporaryDirectory(prefix="cardiac-camp-") as temp_dir:
+                    camp_stl = Path(temp_dir) / stl.name
+                    components[0].export(camp_stl, file_type="stl")
+                    row = runner.run_surface(
+                        camp_stl, camp_results_dir, target_faces=target_faces,
+                        trim_frac=runner.DEFAULT_TRIM, save_html=False)
+                row.update({
+                    "source_faces_before_cleanup": int(len(source.faces)),
+                    "source_components": int(len(components)),
+                    "discarded_components": int(len(discarded)),
+                    "discarded_faces": int(sum(len(part.faces) for part in discarded)),
+                    "discarded_area_pct": float(discarded_pct),
+                })
                 rows.append(row)
                 if row.get("status") != "ok":
                     raise RuntimeError(f"CAMP failed for {case} {side}: {row.get('error', 'unknown error')}")
             summary_path = camp_results_dir / f"{case}_summary.json"
             summary_path.write_text(json.dumps({"case": case, "target_faces": target_faces,
-                                                "trim_frac": 0.01, "rows": rows}, indent=2) + "\n")
+                                                "trim_frac": runner.DEFAULT_TRIM,
+                                                "rows": rows}, indent=2) + "\n")
             return rows
 
         def _camp_payload(self, case):
