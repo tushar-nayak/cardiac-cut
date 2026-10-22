@@ -1,0 +1,19 @@
+# Python 3.11 or 3.12 recommended. Install with: python -m pip install -r requirements.txt
+# Numeric and mesh processing
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+scikit-learn>=1.2
+trimesh>=4.0
+networkx>=3.0
+shapely>=2.0
+rtree>=1.0
+
+# VTK-based mesh review app and browser viewers
+plotly>=5.9
+vtk>=9.2
+pyvista>=0.44
+
+# CAMP remeshing and visualization
+pyacvd>=0.3.1
+matplotlib>=3.7

@@ -13,12 +13,11 @@ For the automatic split and geometry checks only:
 python code/run_cardiac_delta_k.py --split-only
 ```
 
-For the full split plus CAMP analysis, create and activate the existing CAMP
-environment, then run:
+For the full split plus CAMP analysis, install the root repository requirements
+in your active Python environment, then run:
 
 ```bash
-conda env create -f camp/CAMP_Toolkit/environment.yml
-conda activate camp
+python -m pip install -r requirements.txt
 python code/run_cardiac_delta_k.py
 ```
 

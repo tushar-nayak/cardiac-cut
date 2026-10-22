@@ -16,19 +16,23 @@ git clone https://github.com/tushar-nayak/cardiac-cut.git
 cd cardiac-cut
 ```
 
-### 2. Create the Conda environment
+### 2. Create a Python environment and install dependencies
 
-Install [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
-or Mamba if it is not already available, then create and activate the environment
-defined by the repository:
+Use Python 3.11 or 3.12. Create and activate a virtual environment, then install
+the dependencies listed in the repository:
 
 ```bash
-conda env create -f camp/CAMP_Toolkit/environment.yml
-conda activate camp
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 ```
 
-If the `camp` environment already exists, activate it instead. The environment
-includes the mesh, visualization, and CAMP dependencies used by the app.
+On Windows, activate the environment with `.venv\\Scripts\\activate`.
+
+This installs Python packages only. The CAMP and Vascular-cut source folders
+are intentionally excluded from Git; provide those local source trees under
+`camp/` and `vascular-cut/` to use the split and CAMP analysis workflows.
 
 ### 3. Add a mesh
 
